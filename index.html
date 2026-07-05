@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
+<title>AI Letter Generator — Formal Letters in Minutes</title>
+<meta name="description" content="Chat with an AI assistant to generate properly formatted formal letters for Indian students, businesses and government correspondence." />
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <header class="app-header">
+    <div class="brand">
+      <span class="brand-icon" aria-hidden="true">✉️</span>
+      <span class="brand-name">AI Letter Generator</span>
+    </div>
+    <button id="newLetterBtn" class="btn btn-ghost" type="button">+ New Letter</button>
+  </header>
+
+  <main class="app-main">
+
+    <!-- CHAT PANEL -->
+    <section class="chat-panel" aria-label="Chat with the letter assistant">
+      <div class="chat-messages" id="chatMessages">
+        <div class="msg msg-ai">
+          <div class="bubble">
+            Namaste! 🙏 I can help you write any formal letter — leave letter, tender application, RTI request,
+            government office letter, business letter, and more.
+            <br><br>
+            Just tell me what you need in your own words, and I'll ask a few quick questions to get every detail right.
+          </div>
+        </div>
+      </div>
+
+      <div class="typing-indicator" id="typingIndicator" hidden aria-hidden="true">
+        <span></span><span></span><span></span>
+      </div>
+
+      <form class="chat-input-row" id="chatForm">
+        <textarea
+          id="chatInput"
+          rows="1"
+          placeholder="Type your message… e.g. I need a leave letter for my office"
+          aria-label="Type your message"
+        ></textarea>
+        <button type="submit" class="btn btn-send" id="sendBtn" aria-label="Send message">
+          <span class="send-label">Send</span>
+        </button>
+      </form>
+    </section>
+
+    <!-- PREVIEW PANEL -->
+    <section class="preview-panel" aria-label="Letter preview">
+      <div class="preview-header">
+        <h2>Letter Preview</h2>
+        <button id="downloadBtn" class="btn btn-download" type="button" disabled>
+          ⬇ Download PDF
+        </button>
+      </div>
+      <div class="preview-body" id="previewBody">
+        <p class="preview-placeholder" id="previewPlaceholder">
+          Your formatted letter will appear here once we have all the details we need.
+        </p>
+        <pre class="letter-paper" id="letterPaper" hidden></pre>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="app-footer">
+    Built for Indian students, businesses &amp; government correspondence · Nothing you type is stored on any server.
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

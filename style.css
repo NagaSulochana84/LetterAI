@@ -1,0 +1,316 @@
+:root {
+  --blue: #2563eb;
+  --blue-dark: #1d4ed8;
+  --gray-bg: #eef1f4;
+  --gray-text: #1f2430;
+  --page-bg: #f5f6f8;
+  --panel-bg: #ffffff;
+  --border: #e2e5ea;
+  --muted: #6b7280;
+  --green: #16a34a;
+  --danger: #dc2626;
+  --radius: 14px;
+  --shadow: 0 1px 3px rgba(16, 24, 40, 0.06), 0 1px 2px rgba(16, 24, 40, 0.04);
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background: var(--page-bg);
+  color: var(--gray-text);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* ---------- HEADER ---------- */
+.app-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.8rem 1.2rem;
+  background: var(--panel-bg);
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: var(--gray-text);
+}
+
+.brand-icon { font-size: 1.3rem; }
+
+/* ---------- BUTTONS ---------- */
+.btn {
+  border: none;
+  border-radius: 10px;
+  padding: 0.55rem 1rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s ease, box-shadow 0.15s ease, transform 0.05s ease;
+  white-space: nowrap;
+}
+
+.btn:active { transform: translateY(1px); }
+
+.btn-ghost {
+  background: transparent;
+  color: var(--blue);
+  border: 1px solid var(--blue);
+}
+.btn-ghost:hover { background: #eef3ff; }
+
+.btn-send {
+  background: var(--blue);
+  color: #fff;
+  padding: 0.6rem 1.1rem;
+}
+.btn-send:hover { background: var(--blue-dark); }
+.btn-send:disabled { background: #a9c1f5; cursor: not-allowed; }
+
+.btn-download {
+  background: #d9dde3;
+  color: #4b5563;
+  cursor: not-allowed;
+}
+.btn-download:not(:disabled) {
+  background: var(--green);
+  color: #fff;
+  cursor: pointer;
+}
+.btn-download:not(:disabled):hover { background: #128a3e; }
+
+.btn-download.pulse {
+  animation: pulseGlow 1.4s ease-in-out 3;
+}
+@keyframes pulseGlow {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(22, 163, 74, 0.55); }
+  50% { box-shadow: 0 0 0 8px rgba(22, 163, 74, 0.12); }
+}
+
+/* ---------- MAIN LAYOUT ---------- */
+.app-main {
+  flex: 1;
+  display: flex;
+  min-height: 0;
+  gap: 1px;
+  background: var(--border);
+}
+
+.chat-panel,
+.preview-panel {
+  background: var(--panel-bg);
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.chat-panel { flex: 1 1 46%; }
+.preview-panel { flex: 1 1 54%; }
+
+/* ---------- CHAT ---------- */
+.chat-messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.msg {
+  display: flex;
+  margin-bottom: 0.6rem;
+}
+.msg-user { justify-content: flex-end; }
+.msg-ai { justify-content: flex-start; }
+
+.bubble {
+  max-width: 82%;
+  padding: 0.65rem 0.95rem;
+  border-radius: var(--radius);
+  line-height: 1.45;
+  font-size: 0.95rem;
+  word-wrap: break-word;
+  white-space: pre-wrap;
+}
+
+.msg-user .bubble {
+  background: var(--blue);
+  color: #fff;
+  border-bottom-right-radius: 4px;
+}
+
+.msg-ai .bubble {
+  background: var(--gray-bg);
+  color: var(--gray-text);
+  border-bottom-left-radius: 4px;
+}
+
+.msg-ai .bubble.error-bubble {
+  background: #fdecec;
+  color: var(--danger);
+}
+
+/* typing indicator */
+.typing-indicator {
+  display: flex;
+  gap: 4px;
+  padding: 0 1rem 0.6rem 1.2rem;
+}
+.typing-indicator span {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--muted);
+  opacity: 0.4;
+  animation: blink 1.2s infinite ease-in-out;
+}
+.typing-indicator span:nth-child(2) { animation-delay: 0.2s; }
+.typing-indicator span:nth-child(3) { animation-delay: 0.4s; }
+@keyframes blink {
+  0%, 80%, 100% { opacity: 0.25; transform: translateY(0); }
+  40% { opacity: 1; transform: translateY(-3px); }
+}
+
+.chat-input-row {
+  display: flex;
+  gap: 0.6rem;
+  padding: 0.8rem;
+  border-top: 1px solid var(--border);
+}
+
+.chat-input-row textarea {
+  flex: 1;
+  resize: none;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 0.6rem 0.8rem;
+  font-size: 0.95rem;
+  font-family: inherit;
+  max-height: 120px;
+  line-height: 1.4;
+}
+.chat-input-row textarea:focus {
+  outline: none;
+  border-color: var(--blue);
+}
+
+/* ---------- PREVIEW ---------- */
+.preview-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.9rem 1rem;
+  border-bottom: 1px solid var(--border);
+}
+.preview-header h2 {
+  font-size: 1rem;
+  margin: 0;
+  color: var(--gray-text);
+}
+
+.preview-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 1.2rem;
+  background: #fafbfc;
+}
+
+.preview-placeholder {
+  color: var(--muted);
+  font-size: 0.92rem;
+  text-align: center;
+  margin-top: 3rem;
+  padding: 0 1rem;
+}
+
+.letter-paper {
+  background: #fff;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  border-radius: 6px;
+  padding: 1.8rem 1.6rem;
+  min-height: 60vh;
+  max-width: 720px;
+  margin: 0 auto;
+  font-family: "Georgia", "Times New Roman", serif;
+  font-size: 0.95rem;
+  line-height: 1.65;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  color: #1a1a1a;
+}
+
+/* ---------- FOOTER ---------- */
+.app-footer {
+  text-align: center;
+  font-size: 0.78rem;
+  color: var(--muted);
+  padding: 0.6rem;
+  background: var(--panel-bg);
+  border-top: 1px solid var(--border);
+}
+
+/* ---------- RESPONSIVE ---------- */
+@media (max-width: 860px) {
+  .app-main {
+    flex-direction: column;
+  }
+  .chat-panel {
+    flex: 0 0 auto;
+    height: 52vh;
+  }
+  .preview-panel {
+    flex: 1 1 auto;
+    min-height: 48vh;
+  }
+  .letter-paper {
+    padding: 1.2rem 1rem;
+    font-size: 0.9rem;
+  }
+}
+
+/* ---------- PRINT (PDF export) ---------- */
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  .preview-body, .preview-body * {
+    visibility: visible;
+  }
+  .preview-body {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    background: #fff;
+    padding: 0;
+  }
+  .letter-paper {
+    border: none;
+    box-shadow: none;
+    max-width: 100%;
+    padding: 0;
+    margin: 0;
+    font-size: 12.5pt;
+  }
+  .preview-placeholder { display: none; }
+  @page {
+    margin: 2cm;
+  }
+}
